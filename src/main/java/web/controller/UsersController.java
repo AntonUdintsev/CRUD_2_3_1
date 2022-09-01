@@ -14,7 +14,7 @@ import web.model.User;
 public class UsersController {
 	private final UserService userService;
 
-	@Autowired
+
 	public UsersController(UserService userService) {
 		this.userService = userService;
 	}
