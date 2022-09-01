@@ -1,52 +1,47 @@
 package web.dao;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
-import org.hibernate.SessionFactory;
-
-import javax.persistence.TypedQuery;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
-@Repository
+@Component
+@Transactional
 public class UserDaoImpl implements UserDao {
-    public UserDaoImpl() {
-    }
 
-    //  @Autowired
-    //private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     @Override
-    @SuppressWarnings("unchecked")
-    @Transactional
     public List<User> getUsers() {
-    //    TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-    return null; //query.getResultList();
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
 
     @Override
     public void addUser(User user) {
+        entityManager.persist(user);
     }
 
     @Override
     public User showUser(int id) {
-        return null;
+        return entityManager.find(User.class,id);
     }
 
     @Override
     public void updateUser(int id, User user) {
+        entityManager.merge(user);
     }
 
     @Override
     public void deleteUser(int id) {
+        entityManager.remove(showUser(id));
     }
 
 

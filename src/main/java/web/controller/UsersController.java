@@ -4,18 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import web.Service.UserServiceImpl;
+import web.service.UserService;
+import web.service.UserServiceImpl;
 import web.model.User;
+
 
 @Controller
 @RequestMapping(value = "/users")
 public class UsersController {
-	private UserServiceImpl userService;
+	private final UserService userService;
 
 	@Autowired
-	public UsersController(UserServiceImpl userService) {
+	public UsersController(UserService userService) {
 		this.userService = userService;
 	}
+
 
 	@GetMapping()
 	public String printWelcome(ModelMap model, @RequestParam(value = "count", required = false) Integer count) {
