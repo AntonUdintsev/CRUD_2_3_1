@@ -11,7 +11,6 @@ import java.util.List;
 
 
 @Component
-@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
