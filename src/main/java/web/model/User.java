@@ -4,7 +4,7 @@ package web.model;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "users")
+@Table (name = "users_data")
 
 public class User {
     @Id
@@ -19,8 +19,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String userName, String userSurname) {
-        this.id = id;
+    public User(String userName, String userSurname) {
         this.userName = userName;
         this.userSurname = userSurname;
     }
